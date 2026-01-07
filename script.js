@@ -42,24 +42,27 @@ document.addEventListener('DOMContentLoaded', () => {
     `
   };
 
-  /* NEWS badge logic */
-  function refreshNewsBadge() {
-    try {
-      const seen = localStorage.getItem(NEWS_READ_KEY);
-      if (!newsBadge) return;
-      // If stored version equals current, hide the badge; otherwise show (first load)
-      newsBadge.hidden = (seen === NEWS_VERSION);
-    } catch (e) { /* ignore */ }
-  }
-  refreshNewsBadge();
+ function refreshNewsBadge() {
+  try {
+    const seen = localStorage.getItem(NEWS_READ_KEY);
+    if (!newsBadge) return;
 
-  // Mark news as read (store the current version)
-  function markNewsRead() {
-    try {
-      localStorage.setItem(NEWS_READ_KEY, NEWS_VERSION);
-      if (newsBadge) newsBadge.hidden = true;
-    } catch (e) {}
-  }
+    if (seen === NEWS_VERSION) {
+      newsBadge.style.display = 'none';
+    } else {
+      newsBadge.style.display = 'inline-block';
+    }
+  } catch (e) {}
+}
+
+ function markNewsRead() {
+  try {
+    localStorage.setItem(NEWS_READ_KEY, NEWS_VERSION);
+    if (newsBadge) {
+      newsBadge.style.display = 'none';
+    }
+  } catch (e) {}
+}
 
   // Clicking the news button opens the panel and marks read
   if (newsBtn) {
