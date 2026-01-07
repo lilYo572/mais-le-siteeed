@@ -19,14 +19,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const NEWS_VERSION = '1'; // <-- bump to '2' on next update to make the badge reappear for all users
   const NEWS_READ_KEY = 'brad_news_seen_version';
 
-  // Panels content (welcome = en savoir plus)
+  // Panels content (welcome = en savoir plus) — enriched and concise for mobile readability
   const PANELS = {
     welcome: `
       <h2>En savoir plus</h2>
-      <p>
-        C'est ici que l'univers de Brad Bitt prend vie. Sur ce site vous trouverez des articles de développement, 
-        des aperçus exclusifs des prochains projets, des coulisses et des contenus réservés aux visiteurs curieux.
-      </p>
+      <p>Ce hub rassemble l'essentiel autour de Brad Bitt : projets, mini‑série, et ressources créatives.</p>
+      <ul>
+        <li><strong>Le jeu</strong> — Prototype narratif et mécaniques principales.</li>
+        <li><strong>Les épisodes</strong> — Courtes histoires et teasers vidéo.</li>
+        <li><strong>Les musiques</strong> — Ambiances et bandes‑son (bientôt).</li>
+        <li><strong>Le lore</strong> — Chronologie et éléments clés de l'univers.</li>
+      </ul>
+      <p>Utilisez les boutons « Découvrir » et « Voir » pour naviguer rapidement. Cette page sert de point d'accès : vous trouverez aperçus, vidéos intégrées, et liens vers les projets complets.</p>
     `,
     news: `
       <h2>Nouveautés</h2>
@@ -43,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const seen = localStorage.getItem(NEWS_READ_KEY);
       if (!newsBadge) return;
+      // If stored version equals current, hide the badge; otherwise show (first load)
       newsBadge.hidden = (seen === NEWS_VERSION);
     } catch (e) { /* ignore */ }
   }
