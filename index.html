@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Brad Bitt — Hub officiel</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand" role="banner">
+        <div class="logo" aria-hidden="true">BB</div>
+        <div class="brand-text">
+          <div class="title">Brad Bitt</div>
+          <div class="subtitle">mais le site</div>
+        </div>
+      </div>
+
+      <nav class="mini-nav" aria-label="Navigation secondaire">
+        <button class="nav-item" data-panel="news" id="btn-news">Nouveautés <span class="badge" id="news-badge">1</span></button>
+
+        <button id="theme-toggle" class="theme-toggle" aria-label="Changer le thème" title="Mode : automatique">
+          <!-- SVG icons (minimal) -->
+          <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" fill="currentColor"></circle>
+            <g stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
+              <line x1="12" y1="2" x2="12" y2="4"></line>
+              <line x1="12" y1="20" x2="12" y2="22"></line>
+              <line x1="2" y1="12" x2="4" y2="12"></line>
+              <line x1="20" y1="12" x2="22" y2="12"></line>
+              <line x1="4.5" y1="4.5" x2="6" y2="6"></line>
+              <line x1="18" y1="18" x2="19.5" y2="19.5"></line>
+              <line x1="4.5" y1="19.5" x2="6" y2="18"></line>
+              <line x1="18" y1="6" x2="19.5" y2="4.5"></line>
+            </g>
+          </svg>
+
+          <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+            <path fill="currentColor" d="M21 12.8A9 9 0 0111.2 3 7 7 0 0021 12.8z"></path>
+          </svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="app-main">
+    <section class="hero container reveal">
+      <h1>Bienvenue sur le site</h1>
+      <p class="hero-lead">Regroupe les jeux, les épisodes et les coulisses de Brad Bitt.</p>
+
+      <button class="oval-btn" id="oval-learn" aria-controls="panel-welcome">
+        <span class="label">En savoir plus</span>
+        <span class="mini-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14M12 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </button>
+    </section>
+
+    <section class="content container">
+      <!-- CARD: Game -->
+      <article class="card reveal" id="game">
+        <div class="card-inner">
+          <div class="card-top">
+            <h2>Brad Bitt — Le jeu</h2>
+            <p>Présentation du projet, inspirations et teasers. Aperçu du gameplay, sprites et mécanique.</p>
+          </div>
+
+          <div class="card-actions">
+            <button class="btn" id="btn-discover">Découvrir</button>
+
+            <!-- Lien modifiable facilement : remplacer LIEN_A_REMPLACER par l'URL cible -->
+            <a
+              class="btn"
+              href="LIEN_A_REMPLACER"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Accéder au projet
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- CARD: Episodes -->
+      <article class="card reveal" id="episodes">
+        <div class="card-inner">
+          <div class="card-top">
+            <h2>Les aventures de Bitt</h2>
+            <p>Mini-série d'introduction : épisodes, synopsis et teasers.</p>
+          </div>
+
+          <!-- Remplacez YOUTUBE_ID_EP* par les vrais IDs -->
+          <div class="ep-grid" id="ep-grid" aria-hidden="false">
+            <div class="ep-card" tabindex="0" data-episode="1" data-video="YOUTUBE_ID_EP1">
+              <div class="ep-card-inner">
+                <div class="ep-front"><strong>Épisode 1</strong><span>La soirée</span></div>
+                <div class="ep-back">
+                  <p class="ep-summary">Brad Bitt est invité à une somptueuse soirée ; pressé, il s’habille et prend sa voiture habituelle. Mais sur le chemin, un événement inattendu survient lorsqu’il s’engage dans une forêt mystérieuse...</p>
+                  <button class="btn btn-visionner" data-video="YOUTUBE_ID_EP1">Visionner</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="ep-card" tabindex="0" data-episode="2" data-video="YOUTUBE_ID_EP2">
+              <div class="ep-card-inner">
+                <div class="ep-front"><strong>Épisode 2</strong><span>Changement de programme</span></div>
+                <div class="ep-back">
+                  <p class="ep-summary">Après une nuit mouvementée, Brad est capturé par des hommes cagoulés. Interrogé sur des accusations incompréhensibles, il refuse d’avouer et tente de s’échapper — mais sa fuite le précipite dans un trou aussi étrange qu’effrayant.</p>
+                  <button class="btn btn-visionner" data-video="YOUTUBE_ID_EP2">Visionner</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="ep-card" tabindex="0" data-episode="3" data-video="YOUTUBE_ID_EP3">
+              <div class="ep-card-inner">
+                <div class="ep-front"><strong>Épisode 3</strong><span>Retard</span></div>
+                <div class="ep-back">
+                  <p class="ep-summary">Réveillé après une chute amortie par un improbable trampoline, Brad découvre un lieu abandonné et une porte menaçante : un avertissement clair invite à ne pas entrer… naturellement, il n’entend pas s’arrêter là.</p>
+                  <button class="btn btn-visionner" data-video="YOUTUBE_ID_EP3">Visionner</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- CARD: Music -->
+      <article class="card reveal" id="music">
+        <div class="card-inner">
+          <div class="card-top">
+            <h2>Musiques</h2>
+            <p>Prochainement : bandes-son & ambiances.</p>
+          </div>
+          <div class="card-actions">
+            <button class="btn disabled" aria-disabled="true">Prochainement</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- CARD: Lore -->
+      <article class="card reveal" id="lore">
+        <div class="card-inner">
+          <div class="card-top">
+            <h2>L'histoire de Bitt</h2>
+            <p>Le lore, la chronologie et les textes explicatifs de l'univers.</p>
+          </div>
+          <div class="card-actions">
+           <button class="btn disabled" aria-disabled="true">Prochainement</button>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="left">Version 1.0</div>
+      <div class="right">IMAGINe Studio &amp; Engine HwR</div>
+    </div>
+  </footer>
+
+  <!-- Overlays / panels -->
+  <div id="overlay" class="overlay hidden" role="dialog" aria-modal="true">
+    <div class="overlay-inner" id="overlay-inner" tabindex="-1" role="document">
+      <button class="close" id="overlay-close" aria-label="Fermer">✕</button>
+      <div id="overlay-content" class="overlay-content" tabindex="0"></div>
+    </div>
+  </div>
+
+  <!-- External link warning -->
+  <div id="external-warn" class="overlay hidden" role="dialog" aria-modal="true">
+    <div class="overlay-inner">
+      <button class="close" id="warn-close" aria-label="Fermer">✕</button>
+      <h3>Vous allez quitter le site</h3>
+      <p id="warn-msg">En cliquant sur continuer, vous quitterez le site pour aller vers :</p>
+      <div class="warn-actions">
+        <button class="btn" id="warn-cont">Continuer</button>
+        <button class="btn" id="warn-cancel">Annuler</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
