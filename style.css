@@ -33,12 +33,12 @@ html,body{
 .brand{display:flex;align-items:center;gap:12px}
 
 /* Logo: larger, transparent background, responsive */
-.logo{width:72px;height:72px;border-radius:10px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:transparent;padding:4px}
+.logo{width:96px;height:96px;border-radius:10px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:transparent;padding:6px}
 .logo img{width:100%;height:100%;object-fit:contain;object-position:center;display:block}
 
 /* Brand text */
-.brand-text .title{font-weight:700;font-size:14px;letter-spacing:0.6px}
-.brand-text .subtitle{font-size:11px;color:var(--muted)}
+.brand-text .title{font-weight:700;font-size:16px;letter-spacing:0.6px}
+.brand-text .subtitle{font-size:12px;color:var(--muted)}
 
 /* Nav */
 .mini-nav{display:flex;gap:12px;align-items:center}
@@ -63,38 +63,56 @@ html,body{
   display:inline-flex;
   align-items:center;
   gap:8px;
-  background:linear-gradient(90deg,var(--accent),var(--accent-2));
-  color:#071014;
   border-radius:999px;
   padding:12px 22px;
   border:0;
   font-weight:700;
   cursor:pointer;
   transition:transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease;
-  box-shadow: 0 8px 18px rgba(11,12,15,0.45);
+  box-shadow: 0 8px 18px rgba(11,12,15,0.18);
   text-decoration:none;
+  font-size:14px;
+}
+
+/* Large variant used for prominent CTA (En savoir plus) */
+.oval-btn.large{
+  padding:14px 32px;
+  font-size:15px;
+  box-shadow: 0 18px 36px rgba(50,192,193,0.12);
 }
 
 /* Primary oval (En savoir plus) -> restored gradient; consistent in both themes */
 .oval-btn.oval-primary{
   background: linear-gradient(90deg,var(--accent),var(--accent-2));
   color: #071014;
-  box-shadow: 0 10px 28px rgba(50,192,193,0.12);
   border: none;
+  -webkit-background-clip: padding-box;
 }
 .oval-btn.oval-primary:hover{transform:translateY(-2px);filter:brightness(1.03)}
+.oval-btn.oval-primary:focus{outline:3px solid rgba(50,192,193,0.12);outline-offset:3px}
 
-/* Light-theme behavior for neutral oval buttons (Découvrir) */
-:root[data-theme="light"] .oval-btn:not(.oval-primary){
+/* Neutral oval (Discover) — color depends on theme.
+   In light theme: dark oval (black) with white text.
+   In dark theme: white oval with dark text for contrast and readability. */
+:root[data-theme="light"] .oval-btn.oval-neutral {
   background: #071014;
   color: #fff;
-  box-shadow: 0 8px 20px rgba(2,8,12,0.06);
+  box-shadow: 0 10px 26px rgba(7,16,20,0.06);
   border:1px solid rgba(7,16,20,0.04);
 }
-:root[data-theme="light"] .oval-btn:not(.oval-primary):hover{
-  background: #fff;
+:root[data-theme="light"] .oval-btn.oval-neutral:hover{
+  background:#0f1720;
+  color:#fff;
+}
+
+:root:not([data-theme="light"]) .oval-btn.oval-neutral {
+  background: #ffffff;
   color: #071014;
-  border:1px solid rgba(7,16,20,0.08);
+  box-shadow: 0 8px 24px rgba(2,8,12,0.06);
+  border:1px solid rgba(0,0,0,0.06);
+}
+:root:not([data-theme="light"]) .oval-btn.oval-neutral:hover{
+  background:#f4f4f6;
 }
 
 /* Content grid */
@@ -114,7 +132,6 @@ html,body{
 .ep-card-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .6s}
 .ep-card.flipped .ep-card-inner{transform:rotateY(180deg)}
 .ep-front,.ep-back{position:absolute;inset:0;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px;backface-visibility:hidden;overflow:hidden}
- /* Make front/back use same base card color, with subtle gradient or overlay to keep depth */
 .ep-front{background-color:var(--card); color:var(--text); font-weight:700;text-align:center}
 .ep-front span{display:block;font-weight:400;font-size:13px;color:var(--muted)}
 .ep-back{background:var(--card); color:var(--text); transform:rotateY(180deg); text-align:center; padding:12px; justify-content:space-between}
@@ -149,7 +166,7 @@ html,body{
 
 /* Responsive */
 @media (max-width:1100px){
-  .logo{width:64px;height:64px}
+  .logo{width:80px;height:80px}
   .content{grid-template-columns:1fr;gap:20px;padding:12px 20px}
   .card{min-height:auto;padding:20px}
   .ep-grid{justify-content:flex-start;overflow:auto;padding-bottom:6px}
@@ -158,7 +175,8 @@ html,body{
 @media (max-width:480px){
   .hero h1{font-size:24px}
   .oval-btn{width:100%;justify-content:center}
-  .logo{width:48px;height:48px}
+  .logo{width:56px;height:56px}
+  .oval-btn.large{padding:12px 20px;font-size:15px}
   .ep-card{width:100%;height:140px}
   .ep-grid{flex-direction:column;gap:12px}
 }
