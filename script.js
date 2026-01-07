@@ -26,11 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
       <p>
         C'est ici que l'univers de Brad Bitt prend vie. Sur ce site vous trouverez des articles de développement, 
         des aperçus exclusifs des prochains projets, des coulisses et des contenus réservés aux visiteurs curieux.
-        Nous partageons des notes de design, des prototypes, et des inspirations qui façonnent l'expérience.
-      </p>
-      <p>
-        N'hésitez pas à revenir régulièrement — de nouvelles pages, vidéos et prototypes sont ajoutés au fil du temps.
-        Abonnez-vous aux mises à jour ou repassez de temps à autre pour découvrir les nouveautés.
       </p>
     `,
     news: `
@@ -39,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     `,
     game: `
       <h2>Brad Bitt — Le jeu</h2>
-      <p>Aperçu du jeu, mécaniques et notes de développement. Screens, sprites et petits aperçus.</p>
+      <p>Aperçu du jeu, mécaniques et notes de développement.</p>
     `
   };
 
@@ -200,12 +195,9 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   /* --- Fix: reveal elements on load --- */
-  // Les éléments avec la classe .reveal sont initialement masqués (opacity:0).
-  // On active leur visibilité en ajoutant .visible après le chargement.
   (function revealOnLoad() {
     const reveals = $$('.reveal');
     if (!reveals.length) return;
-    // léger décalage/stagger pour l'effet
     reveals.forEach((el, i) => {
       setTimeout(() => el.classList.add('visible'), 80 * i);
     });
