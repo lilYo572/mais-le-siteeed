@@ -144,4 +144,16 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('To show the badge to users, update NEWS_VERSION in script and deploy with new version:', ver);
   };
 
+  /* --- Fix: reveal elements on load --- */
+  // Les éléments avec la classe .reveal sont initialement masqués (opacity:0).
+  // On active leur visibilité en ajoutant .visible après le chargement.
+  (function revealOnLoad() {
+    const reveals = $$('.reveal');
+    if (!reveals.length) return;
+    // léger décalage/stagger pour l'effet
+    reveals.forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), 80 * i);
+    });
+  })();
+
 });
