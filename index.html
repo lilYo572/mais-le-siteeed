@@ -14,7 +14,10 @@
   <header class="site-header">
     <div class="container header-inner">
       <div class="brand" role="banner">
-        <div class="logo" aria-hidden="true">BB</div>
+        <div class="logo" aria-hidden="true">
+          <!-- Use a centered logo image (panoramic source). URL encoded filename in case of spaces. -->
+          <img src="image/logo%20BB%20mais%20le%20site.png" alt="Logo Brad Bitt">
+        </div>
         <div class="brand-text">
           <div class="title">Brad Bitt</div>
           <div class="subtitle">mais le site</div>
@@ -53,11 +56,9 @@
       <h1>Bienvenue sur le site</h1>
       <p class="hero-lead">Regroupe les jeux, les épisodes et les coulisses de Brad Bitt.</p>
 
+      <!-- En savoir plus: simple ovale sans flèche (requested) -->
       <button class="oval-btn" id="oval-learn" aria-controls="panel-welcome">
         <span class="label">En savoir plus</span>
-        <span class="mini-arrow" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14M12 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </span>
       </button>
     </section>
 
@@ -71,7 +72,8 @@
           </div>
 
           <div class="card-actions">
-            <button class="btn" id="btn-discover">Découvrir</button>
+            <!-- Nouveau bouton ovale "Découvrir" (prêt pour lien) -->
+            <a class="oval-btn" id="btn-discover" href="LIEN_A_REMPLACER" role="button">Découvrir</a>
 
             <!-- Lien modifiable facilement : remplacer LIEN_A_REMPLACER par l'URL cible -->
             <a
@@ -100,8 +102,8 @@
               <div class="ep-card-inner">
                 <div class="ep-front"><strong>Épisode 1</strong><span>La soirée</span></div>
                 <div class="ep-back">
-                  <p class="ep-summary">Brad Bitt est invité à une somptueuse soirée ; pressé, il s’habille et prend sa voiture habituelle. Mais sur le chemin, un événement inattendu survient lorsqu’il s’engage dans une forêt mystérieuse...</p>
-                  <button class="btn btn-visionner" data-video="YOUTUBE_ID_EP1">Visionner</button>
+                  <p class="ep-summary">Brad Bitt est invité à une somptueuse soirée ; pressé, il s’habille et prend sa voiture habituelle. Mais sur le chemin, un événement inattendu survient [...]</p>
+                  <button class="btn btn-visionner" data-video="YOUTUBE_ID_EP1">Voir</button>
                 </div>
               </div>
             </div>
@@ -110,8 +112,8 @@
               <div class="ep-card-inner">
                 <div class="ep-front"><strong>Épisode 2</strong><span>Changement de programme</span></div>
                 <div class="ep-back">
-                  <p class="ep-summary">Après une nuit mouvementée, Brad est capturé par des hommes cagoulés. Interrogé sur des accusations incompréhensibles, il refuse d’avouer et tente de s’échapper — mais sa fuite le précipite dans un trou aussi étrange qu’effrayant.</p>
-                  <button class="btn btn-visionner" data-video="YOUTUBE_ID_EP2">Visionner</button>
+                  <p class="ep-summary">Après une nuit mouvementée, Brad est capturé par des hommes cagoulés. Interrogé sur des accusations incompréhensibles, il refuse d’avouer et tente de s[...]</p>
+                  <button class="btn btn-visionner" data-video="YOUTUBE_ID_EP2">Voir</button>
                 </div>
               </div>
             </div>
@@ -120,8 +122,8 @@
               <div class="ep-card-inner">
                 <div class="ep-front"><strong>Épisode 3</strong><span>Retard</span></div>
                 <div class="ep-back">
-                  <p class="ep-summary">Réveillé après une chute amortie par un improbable trampoline, Brad découvre un lieu abandonné et une porte menaçante : un avertissement clair invite à ne pas entrer… naturellement, il n’entend pas s’arrêter là.</p>
-                  <button class="btn btn-visionner" data-video="YOUTUBE_ID_EP3">Visionner</button>
+                  <p class="ep-summary">Réveillé après une chute amortie par un improbable trampoline, Brad découvre un lieu abandonné et une porte menaçante : un avertissement clair invite à n[...]</p>
+                  <button class="btn btn-visionner" data-video="YOUTUBE_ID_EP3">Voir</button>
                 </div>
               </div>
             </div>
