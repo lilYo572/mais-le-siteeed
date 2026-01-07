@@ -1,190 +1,138 @@
-<!doctype html>
-<html lang="fr">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Brad Bitt — Hub officiel</title>
+:root{
+  --bg:#0b0b0f; --card:#0f1113; --muted:#9aa3b2;
+  --accent:#32C0C1; --accent-2:#F53098; --text:#e9eef6;
+  --glass: rgba(255,255,255,0.035);
+  --radius:12px; --maxw:1100px; --container-pad:20px;
+}
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+/* Light theme overrides */
+:root[data-theme="light"]{
+  --bg: #f6f7fb;
+  --card: #ffffff;
+  --muted: #58606b;
+  --text: #071014;
+  --glass: rgba(7,16,20,0.03);
+}
 
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <div class="brand" role="banner">
-        <div class="logo" aria-hidden="true">BB</div>
-        <div class="brand-text">
-          <div class="title">Brad Bitt</div>
-          <div class="subtitle">mais le site</div>
-        </div>
-      </div>
+*{box-sizing:border-box}
+html,body{
+  height:100%;
+  margin:0;
+  background: var(--bg);
+  color: var(--text);
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+}
 
-      <nav class="mini-nav" aria-label="Navigation secondaire">
-        <button class="nav-item" data-panel="news" id="btn-news">Nouveautés <span class="badge" id="news-badge">1</span></button>
+.container{max-width:var(--maxw);margin:0 auto;padding:32px var(--container-pad)}
 
-        <button id="theme-toggle" class="theme-toggle" aria-label="Changer le thème" title="Mode : automatique">
-          <!-- SVG icons (minimal) -->
-          <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-            <circle cx="12" cy="12" r="4" fill="currentColor"></circle>
-            <g stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
-              <line x1="12" y1="2" x2="12" y2="4"></line>
-              <line x1="12" y1="20" x2="12" y2="22"></line>
-              <line x1="2" y1="12" x2="4" y2="12"></line>
-              <line x1="20" y1="12" x2="22" y2="12"></line>
-              <line x1="4.5" y1="4.5" x2="6" y2="6"></line>
-              <line x1="18" y1="18" x2="19.5" y2="19.5"></line>
-              <line x1="4.5" y1="19.5" x2="6" y2="18"></line>
-              <line x1="18" y1="6" x2="19.5" y2="4.5"></line>
-            </g>
-          </svg>
+/* Header */
+.site-header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,rgba(6,6,8,0.55),rgba(6,6,8,0.25));backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,0.03)}
+:root[data-theme="light"] .site-header{ background:linear-gradient(180deg,rgba(255,255,255,0.9),rgba(255,255,255,0.8)); border-bottom:1px solid rgba(7,16,20,0.04) }
+.header-inner{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:48px;height:48px;border-radius:10px;background:linear-gradient(90deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;font-weight:800;color:#071014}
+.brand-text .title{font-weight:700;font-size:14px;letter-spacing:0.6px}
+.brand-text .subtitle{font-size:11px;color:var(--muted)}
 
-          <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-            <path fill="currentColor" d="M21 12.8A9 9 0 0111.2 3 7 7 0 0021 12.8z"></path>
-          </svg>
-        </button>
-      </nav>
-    </div>
-  </header>
+/* Nav */
+.mini-nav{display:flex;gap:12px;align-items:center}
+.nav-item{background:transparent;border:0;color:var(--text);padding:8px 10px;border-radius:8px;cursor:pointer;position:relative;font-weight:600}
+.nav-item:focus{outline:2px solid rgba(255,255,255,0.06);outline-offset:3px}
+.badge{display:inline-block;background:#ff4d6d;color:#fff;border-radius:8px;padding:2px 6px;font-size:11px;margin-left:8px}
 
-  <main id="app-main">
-    <section class="hero container reveal">
-      <h1>Bienvenue sur le site</h1>
-      <p class="hero-lead">Regroupe les jeux, les épisodes et les coulisses de Brad Bitt.</p>
+/* Theme toggle */
+.theme-toggle{display:inline-flex;align-items:center;gap:8px;padding:6px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text);cursor:pointer}
+.theme-toggle svg{opacity:0.6}
 
-      <button class="oval-btn" id="oval-learn" aria-controls="panel-welcome">
-        <span class="label">En savoir plus</span>
-        <span class="mini-arrow" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14M12 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </span>
-      </button>
-    </section>
+/* Hero */
+.hero{display:flex;flex-direction:column;align-items:flex-start;gap:18px;padding-top:42px;padding-bottom:42px}
+.hero h1{font-size:36px;margin:0}
+.hero-lead{color:var(--muted);margin:0;max-width:720px}
 
-    <section class="content container">
-      <!-- CARD: Game -->
-      <article class="card reveal" id="game">
-        <div class="card-inner">
-          <div class="card-top">
-            <h2>Brad Bitt — Le jeu</h2>
-            <p>Présentation du projet, inspirations et teasers. Aperçu du gameplay, sprites et mécanique.</p>
-          </div>
+/* OVAL BUTTON + mini-arrow animation */
+.oval-btn{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  color:#071014;
+  border-radius:999px;
+  padding:12px 22px;
+  border:0;
+  font-weight:700;
+  cursor:pointer;
+  transition:transform .18s ease, box-shadow .18s ease;
+  box-shadow: 0 8px 18px rgba(11,12,15,0.45);
+}
+.oval-btn .label{position:relative;z-index:2}
+.oval-btn .mini-arrow{
+  position:absolute;
+  top:50%;
+  right:18px;
+  transform:translateY(-50%) scale(0);
+  opacity:0;
+  transition:all .32s cubic-bezier(.2,.9,.2,1);
+  width:18px;height:18px;display:flex;align-items:center;justify-content:center;
+}
+.oval-btn:hover{transform:translateY(-2px)}
+.oval-btn:hover .mini-arrow{transform:translate(120%,-60%) rotate(45deg) scale(1);opacity:1}
+.oval-btn .mini-arrow svg{width:18px;height:18px;display:block;color:var(--text)}
 
-          <div class="card-actions">
-            <button class="btn" id="btn-discover">Découvrir</button>
+/* Content grid */
+.content{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;grid-auto-rows:minmax(240px,auto);padding-bottom:60px}
 
-            <!-- Lien modifiable facilement : remplacer LIEN_A_REMPLACER par l'URL cible -->
-            <a
-              class="btn"
-              href="LIEN_A_REMPLACER"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Accéder au projet
-            </a>
-          </div>
-        </div>
-      </article>
+/* Card */
+.card{background:var(--card);padding:24px;border-radius:14px;box-shadow:0 18px 40px rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.03);display:flex;flex-direction:column;min-height:240px}
+.card-inner{display:flex;flex-direction:column;gap:12px;flex:1}
+.card-actions{display:flex;gap:8px;margin-top:auto}
+.card h2{margin:0 0 8px 0;font-size:22px}
+.card p{color:var(--muted);margin:0 0 12px 0;line-height:1.6}
 
-      <!-- CARD: Episodes -->
-      <article class="card reveal" id="episodes">
-        <div class="card-inner">
-          <div class="card-top">
-            <h2>Les aventures de Bitt</h2>
-            <p>Mini-série d'introduction : épisodes, synopsis et teasers.</p>
-          </div>
+/* EP GRID & FLIP CARDS */
+.ep-grid{display:flex;gap:12px;align-items:stretch;flex-wrap:wrap}
+.ep-card{position:relative;width:200px;height:120px;border-radius:12px;cursor:pointer;perspective:1000px}
+.ep-card-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .6s}
+.ep-card.flipped .ep-card-inner{transform:rotateY(180deg)}
+.ep-front,.ep-back{position:absolute;inset:0;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px;backface-visibility:hidden}
+.ep-front{background:linear-gradient(180deg,#0c1a2a,#07344a);color:#fff;font-weight:700;text-align:center}
+.ep-front span{display:block;font-weight:400;font-size:13px;color:var(--muted)}
+.ep-back{background:linear-gradient(180deg,#0f1113,#111315);color:var(--text);transform:rotateY(180deg);text-align:center;padding:12px}
+.ep-back p{font-weight:500;color:var(--text);margin-bottom:12px}
+.ep-back .btn-visionner{display:inline-flex;align-items:center;gap:8px}
 
-          <!-- Remplacez YOUTUBE_ID_EP* par les vrais IDs -->
-          <div class="ep-grid" id="ep-grid" aria-hidden="false">
-            <div class="ep-card" tabindex="0" data-episode="1" data-video="YOUTUBE_ID_EP1">
-              <div class="ep-card-inner">
-                <div class="ep-front"><strong>Épisode 1</strong><span>La soirée</span></div>
-                <div class="ep-back">
-                  <p class="ep-summary">Brad Bitt est invité à une somptueuse soirée ; pressé, il s’habille et prend sa voiture habituelle. Mais sur le chemin, un événement inattendu survient lorsqu’il s’engage dans une forêt mystérieuse...</p>
-                  <button class="btn btn-visionner" data-video="YOUTUBE_ID_EP1">Visionner</button>
-                </div>
-              </div>
-            </div>
+/* Video wrapper inside overlay */
+.video-wrap{position:relative;padding-top:56.25%;width:100%}
+.video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:8px}
 
-            <div class="ep-card" tabindex="0" data-episode="2" data-video="YOUTUBE_ID_EP2">
-              <div class="ep-card-inner">
-                <div class="ep-front"><strong>Épisode 2</strong><span>Changement de programme</span></div>
-                <div class="ep-back">
-                  <p class="ep-summary">Après une nuit mouvementée, Brad est capturé par des hommes cagoulés. Interrogé sur des accusations incompréhensibles, il refuse d’avouer et tente de s’échapper — mais sa fuite le précipite dans un trou aussi étrange qu’effrayant.</p>
-                  <button class="btn btn-visionner" data-video="YOUTUBE_ID_EP2">Visionner</button>
-                </div>
-              </div>
-            </div>
+/* Buttons */
+.btn{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 12px;border-radius:8px;color:var(--text);cursor:pointer;font-weight:700}
+.btn.small{padding:6px 8px;font-size:13px}
+.btn.disabled{opacity:0.45;cursor:default;border-style:dashed}
 
-            <div class="ep-card" tabindex="0" data-episode="3" data-video="YOUTUBE_ID_EP3">
-              <div class="ep-card-inner">
-                <div class="ep-front"><strong>Épisode 3</strong><span>Retard</span></div>
-                <div class="ep-back">
-                  <p class="ep-summary">Réveillé après une chute amortie par un improbable trampoline, Brad découvre un lieu abandonné et une porte menaçante : un avertissement clair invite à ne pas entrer… naturellement, il n’entend pas s’arrêter là.</p>
-                  <button class="btn btn-visionner" data-video="YOUTUBE_ID_EP3">Visionner</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </article>
+/* Overlay */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;z-index:200}
+.overlay.hidden{display:none}
+.overlay-inner{background:linear-gradient(180deg,#0b0b0f,#0f1113);padding:28px;border-radius:12px;max-width:880px;width:92%;position:relative;box-shadow:0 20px 60px rgba(0,0,0,0.6);color:var(--text)}
+:root[data-theme="light"] .overlay-inner{background:linear-gradient(180deg,#ffffff,#f7f8fb);color:var(--text);border:1px solid rgba(7,16,20,0.06)}
+.overlay .close{position:absolute;top:12px;right:12px;border:0;background:transparent;color:var(--muted);font-size:20px;cursor:pointer}
+.overlay-content{max-height:70vh;overflow:auto;padding-right:6px}
 
-      <!-- CARD: Music -->
-      <article class="card reveal" id="music">
-        <div class="card-inner">
-          <div class="card-top">
-            <h2>Musiques</h2>
-            <p>Prochainement : bandes-son & ambiances.</p>
-          </div>
-          <div class="card-actions">
-            <button class="btn disabled" aria-disabled="true">Prochainement</button>
-          </div>
-        </div>
-      </article>
+/* reveal */
+.reveal{opacity:0;transform:translateY(14px);transition:all .6s cubic-bezier(.2,.9,.2,1)}
+.reveal.visible{opacity:1;transform:none}
 
-      <!-- CARD: Lore -->
-      <article class="card reveal" id="lore">
-        <div class="card-inner">
-          <div class="card-top">
-            <h2>L'histoire de Bitt</h2>
-            <p>Le lore, la chronologie et les textes explicatifs de l'univers.</p>
-          </div>
-          <div class="card-actions">
-           <button class="btn disabled" aria-disabled="true">Prochainement</button>
-          </div>
-        </div>
-      </article>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div class="left">Version 1.0</div>
-      <div class="right">IMAGINe Studio &amp; Engine HwR</div>
-    </div>
-  </footer>
-
-  <!-- Overlays / panels -->
-  <div id="overlay" class="overlay hidden" role="dialog" aria-modal="true">
-    <div class="overlay-inner" id="overlay-inner" tabindex="-1" role="document">
-      <button class="close" id="overlay-close" aria-label="Fermer">✕</button>
-      <div id="overlay-content" class="overlay-content" tabindex="0"></div>
-    </div>
-  </div>
-
-  <!-- External link warning -->
-  <div id="external-warn" class="overlay hidden" role="dialog" aria-modal="true">
-    <div class="overlay-inner">
-      <button class="close" id="warn-close" aria-label="Fermer">✕</button>
-      <h3>Vous allez quitter le site</h3>
-      <p id="warn-msg">En cliquant sur continuer, vous quitterez le site pour aller vers :</p>
-      <div class="warn-actions">
-        <button class="btn" id="warn-cont">Continuer</button>
-        <button class="btn" id="warn-cancel">Annuler</button>
-      </div>
-    </div>
-  </div>
-
-  <script src="script.js" defer></script>
-</body>
-</html>
+/* Responsive */
+@media (max-width:1100px){
+  .content{grid-template-columns:1fr;gap:20px;padding:12px 20px}
+  .card{min-height:auto;padding:20px}
+  .ep-grid{justify-content:flex-start;overflow:auto;padding-bottom:6px}
+  .ep-card{width:160px;height:100px}
+}
+@media (max-width:480px){
+  .hero h1{font-size:24px}
+  .oval-btn{width:100%;justify-content:center}
+  .ep-card{width:100%;height:140px}
+  .ep-grid{flex-direction:column;gap:12px}
+}
