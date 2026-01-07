@@ -15,7 +15,7 @@
     <div class="container header-inner">
       <div class="brand" role="banner">
         <div class="logo" aria-hidden="true">
-          <!-- Use a centered logo image (panoramic source). URL encoded filename in case of spaces. -->
+          <!-- Logo (panoramic source). Keep transparent background in the image file. -->
           <img src="image/logo%20BB%20mais%20le%20site.png" alt="Logo Brad Bitt">
         </div>
         <div class="brand-text">
@@ -54,10 +54,10 @@
   <main id="app-main">
     <section class="hero container reveal">
       <h1>Bienvenue sur le site</h1>
-      <p class="hero-lead">Regroupe les jeux, les épisodes et les coulisses de Brad Bitt.</p>
+      <p class="hero-lead">Jeux, épisodes et coulisses de Brad Bitt — l'essentiel en un seul endroit.</p>
 
-      <!-- En savoir plus: simple ovale sans flèche (requested) -->
-      <button class="oval-btn" id="oval-learn" aria-controls="panel-welcome">
+      <!-- En savoir plus: ovale gradient (restauré) -->
+      <button class="oval-btn oval-primary" id="oval-learn" aria-controls="panel-welcome">
         <span class="label">En savoir plus</span>
       </button>
     </section>
@@ -68,22 +68,12 @@
         <div class="card-inner">
           <div class="card-top">
             <h2>Brad Bitt — Le jeu</h2>
-            <p>Présentation du projet, inspirations et teasers. Aperçu du gameplay, sprites et mécanique.</p>
+            <p>Prototype narratif : gameplay rapide et univers visuel fort.</p>
           </div>
 
           <div class="card-actions">
             <!-- Nouveau bouton ovale "Découvrir" (prêt pour lien) -->
             <a class="oval-btn" id="btn-discover" href="LIEN_A_REMPLACER" role="button">Découvrir</a>
-
-            <!-- Lien modifiable facilement : remplacer LIEN_A_REMPLACER par l'URL cible -->
-            <a
-              class="btn"
-              href="LIEN_A_REMPLACER"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Accéder au projet
-            </a>
           </div>
         </div>
       </article>
@@ -93,16 +83,15 @@
         <div class="card-inner">
           <div class="card-top">
             <h2>Les aventures de Bitt</h2>
-            <p>Mini-série d'introduction : épisodes, synopsis et teasers.</p>
+            <p>Mini-série : petits épisodes, gros mystère.</p>
           </div>
 
-          <!-- Remplacez YOUTUBE_ID_EP* par les vrais IDs -->
           <div class="ep-grid" id="ep-grid" aria-hidden="false">
             <div class="ep-card" tabindex="0" data-episode="1" data-video="YOUTUBE_ID_EP1">
               <div class="ep-card-inner">
                 <div class="ep-front"><strong>Épisode 1</strong><span>La soirée</span></div>
                 <div class="ep-back">
-                  <p class="ep-summary">Brad Bitt est invité à une somptueuse soirée ; pressé, il s’habille et prend sa voiture habituelle. Mais sur le chemin, un événement inattendu survient [...]</p>
+                  <p class="ep-summary">Brad arrive à une soirée — tout bascule.</p>
                   <button class="btn btn-visionner" data-video="YOUTUBE_ID_EP1">Voir</button>
                 </div>
               </div>
@@ -110,9 +99,9 @@
 
             <div class="ep-card" tabindex="0" data-episode="2" data-video="YOUTUBE_ID_EP2">
               <div class="ep-card-inner">
-                <div class="ep-front"><strong>Épisode 2</strong><span>Changement de programme</span></div>
+                <div class="ep-front"><strong>Épisode 2</strong><span>Changement</span></div>
                 <div class="ep-back">
-                  <p class="ep-summary">Après une nuit mouvementée, Brad est capturé par des hommes cagoulés. Interrogé sur des accusations incompréhensibles, il refuse d’avouer et tente de s[...]</p>
+                  <p class="ep-summary">Brad disparaît dans des circonstances étranges.</p>
                   <button class="btn btn-visionner" data-video="YOUTUBE_ID_EP2">Voir</button>
                 </div>
               </div>
@@ -122,7 +111,7 @@
               <div class="ep-card-inner">
                 <div class="ep-front"><strong>Épisode 3</strong><span>Retard</span></div>
                 <div class="ep-back">
-                  <p class="ep-summary">Réveillé après une chute amortie par un improbable trampoline, Brad découvre un lieu abandonné et une porte menaçante : un avertissement clair invite à n[...]</p>
+                  <p class="ep-summary">Un lieu abandonné, un avertissement — suite à suivre.</p>
                   <button class="btn btn-visionner" data-video="YOUTUBE_ID_EP3">Voir</button>
                 </div>
               </div>
@@ -136,7 +125,7 @@
         <div class="card-inner">
           <div class="card-top">
             <h2>Musiques</h2>
-            <p>Prochainement : bandes-son & ambiances.</p>
+            <p>Bandes-son et ambiances — bientôt disponibles.</p>
           </div>
           <div class="card-actions">
             <button class="btn disabled" aria-disabled="true">Prochainement</button>
@@ -149,7 +138,7 @@
         <div class="card-inner">
           <div class="card-top">
             <h2>L'histoire de Bitt</h2>
-            <p>Le lore, la chronologie et les textes explicatifs de l'univers.</p>
+            <p>Chronologie et éléments clés de l'univers.</p>
           </div>
           <div class="card-actions">
            <button class="btn disabled" aria-disabled="true">Prochainement</button>
@@ -161,7 +150,7 @@
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <div class="left">Version 1.0</div>
+      <div class="left">v1.0</div>
       <div class="right">IMAGINe Studio &amp; Engine HwR</div>
     </div>
   </footer>
