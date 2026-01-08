@@ -32,8 +32,8 @@ html,body{
 .header-inner{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .brand{display:flex;align-items:center;gap:12px}
 
-/* Logo: larger, transparent background, responsive */
-.logo{width:96px;height:96px;border-radius:10px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:transparent;padding:6px}
+/* Logo: increased size proportionally and centered in header area */
+.logo{width:120px;height:120px;border-radius:10px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:transparent;padding:6px}
 .logo img{width:100%;height:100%;object-fit:contain;object-position:center;display:block}
 
 /* Brand text */
@@ -81,19 +81,18 @@ html,body{
   box-shadow: 0 18px 36px rgba(50,192,193,0.12);
 }
 
-/* Primary oval (En savoir plus) -> restored gradient; consistent in both themes */
+/* Primary oval (En savoir plus) -> gradient cyan→rose */
 .oval-btn.oval-primary{
   background: linear-gradient(90deg,var(--accent),var(--accent-2));
   color: #071014;
   border: none;
-  -webkit-background-clip: padding-box;
 }
 .oval-btn.oval-primary:hover{transform:translateY(-2px);filter:brightness(1.03)}
 .oval-btn.oval-primary:focus{outline:3px solid rgba(50,192,193,0.12);outline-offset:3px}
 
 /* Neutral oval (Discover) — color depends on theme.
-   In light theme: dark oval (black) with white text.
-   In dark theme: white oval with dark text for contrast and readability. */
+   Light theme: dark oval with white text.
+   Dark theme: white oval with dark text. */
 :root[data-theme="light"] .oval-btn.oval-neutral {
   background: #071014;
   color: #fff;
@@ -164,9 +163,9 @@ html,body{
 .reveal{opacity:0;transform:translateY(14px);transition:all .6s cubic-bezier(.2,.9,.2,1)}
 .reveal.visible{opacity:1;transform:none}
 
-/* Responsive */
+/* Responsive logo sizes */
 @media (max-width:1100px){
-  .logo{width:80px;height:80px}
+  .logo{width:96px;height:96px}
   .content{grid-template-columns:1fr;gap:20px;padding:12px 20px}
   .card{min-height:auto;padding:20px}
   .ep-grid{justify-content:flex-start;overflow:auto;padding-bottom:6px}
@@ -175,7 +174,7 @@ html,body{
 @media (max-width:480px){
   .hero h1{font-size:24px}
   .oval-btn{width:100%;justify-content:center}
-  .logo{width:56px;height:56px}
+  .logo{width:64px;height:64px}
   .oval-btn.large{padding:12px 20px;font-size:15px}
   .ep-card{width:100%;height:140px}
   .ep-grid{flex-direction:column;gap:12px}
