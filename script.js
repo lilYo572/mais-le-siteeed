@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const PANELS = {
     welcome: `
       <h2>En savoir plus</h2>
-      <p>Brad Bitt, c’est un univers en cours de construction.
+      <p>
       Ce site rassemble tout ce qui gravite autour du projet : les expériences interactives, les épisodes, les ambiances sonores et les éléments de récit qui donnent vie à ce monde.</p>
 
       <p>Vous pouvez y découvrir le futur jeu et son univers, suivre les aventures de Brad à travers de courts épisodes, et explorer peu à peu l’histoire qui se dessine en arrière-plan.</p>
