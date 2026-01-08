@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const NEWS_VERSION = '1'; // <-- bump to '2' on next update to make the badge reappear for all users
   const NEWS_READ_KEY = 'brad_news_seen_version';
 
-  // Panels content (welcome = en savoir plus) — enriched and concise for mobile readability
+  // Panels content (welcome = en savoir plus)
   const PANELS = {
     welcome: `
       <h2>En savoir plus</h2>
@@ -42,27 +42,24 @@ document.addEventListener('DOMContentLoaded', () => {
     `
   };
 
- function refreshNewsBadge() {
-  try {
-    const seen = localStorage.getItem(NEWS_READ_KEY);
-    if (!newsBadge) return;
+  /* NEWS badge logic */
+  function refreshNewsBadge() {
+    try {
+      const seen = localStorage.getItem(NEWS_READ_KEY);
+      if (!newsBadge) return;
+      // If stored version equals current, hide the badge; otherwise show (first load)
+      newsBadge.hidden = (seen === NEWS_VERSION);
+    } catch (e) { /* ignore */ }
+  }
+  refreshNewsBadge();
 
-    if (seen === NEWS_VERSION) {
-      newsBadge.style.display = 'none';
-    } else {
-      newsBadge.style.display = 'inline-block';
-    }
-  } catch (e) {}
-}
-
- function markNewsRead() {
-  try {
-    localStorage.setItem(NEWS_READ_KEY, NEWS_VERSION);
-    if (newsBadge) {
-      newsBadge.style.display = 'none';
-    }
-  } catch (e) {}
-}
+  // Mark news as read (store the current version)
+  function markNewsRead() {
+    try {
+      localStorage.setItem(NEWS_READ_KEY, NEWS_VERSION);
+      if (newsBadge) newsBadge.hidden = true;
+    } catch (e) {}
+  }
 
   // Clicking the news button opens the panel and marks read
   if (newsBtn) {
