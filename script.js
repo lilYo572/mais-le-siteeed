@@ -172,7 +172,8 @@ newsBtn.addEventListener('click', () => {
   });
 
   /* Theme init + toggle (light/dark/auto) */
-  function applyTheme(pref, save = true) {
+    applyTheme(next, true);
+updateLogoForTheme(next);
     try {
       const root = document.documentElement;
       if (pref === 'light') {
