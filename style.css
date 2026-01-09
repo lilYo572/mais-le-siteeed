@@ -31,8 +31,14 @@ html,body{
 :root[data-theme="light"] .site-header{ background:linear-gradient(180deg,rgba(255,255,255,0.9),rgba(255,255,255,0.8)); border-bottom:1px solid rgba(7,16,20,0.04) }
 .header-inner{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .brand{display:flex;align-items:center;gap:12px}
-.logo{width:48px;height:48px;border-radius:10px;background:linear-gradient(90deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;font-weight:800;color:#071014}
-.logo img{width:100%;height:100%;object-fit:contain;object-position:center;display:block;border-radius:10px}
+
+/* Logo: increased size proportionally and centered in header area */
+.logo{width:120px;height:120px;border-radius:10px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:transparent;padding:6px}
+.logo img{width:100%;height:100%;object-fit:contain;object-position:center;display:block}
+
+/* Brand text */
+.brand-text .title{font-weight:700;font-size:16px;letter-spacing:0.6px}
+.brand-text .subtitle{font-size:12px;color:var(--muted)}
 
 /* Nav */
 .mini-nav{display:flex;gap:12px;align-items:center}
@@ -42,64 +48,94 @@ html,body{
 
 /* Theme toggle */
 .theme-toggle{display:inline-flex;align-items:center;gap:8px;padding:6px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text);cursor:pointer}
-.theme-toggle svg{opacity:0.6}
+.theme-toggle svg{opacity:0.45;transition:opacity .18s ease, transform .18s ease}
+.theme-toggle.is-light .icon-sun{opacity:1; transform:scale(1.05)}
+.theme-toggle.is-dark .icon-moon{opacity:1; transform:scale(1.05)}
 
 /* Hero */
 .hero{display:flex;flex-direction:column;align-items:flex-start;gap:18px;padding-top:42px;padding-bottom:42px}
 .hero h1{font-size:36px;margin:0}
 .hero-lead{color:var(--muted);margin:0;max-width:720px}
 
-/* OVAL BUTTON + mini-arrow animation */
+/* OVAL BUTTON (general) */
 .oval-btn{
   position:relative;
   display:inline-flex;
   align-items:center;
   gap:8px;
-  background:linear-gradient(90deg,var(--accent),var(--accent-2));
-  color:#071014;
   border-radius:999px;
   padding:12px 22px;
   border:0;
   font-weight:700;
   cursor:pointer;
-  transition:transform .18s ease, box-shadow .18s ease;
-  box-shadow: 0 8px 18px rgba(11,12,15,0.45);
+  transition:transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease;
+  box-shadow: 0 8px 18px rgba(11,12,15,0.18);
+  text-decoration:none;
+  font-size:14px;
 }
-.oval-btn .label{position:relative;z-index:2}
-.oval-btn .mini-arrow{
-  position:absolute;
-  top:50%;
-  right:18px;
-  transform:translateY(-50%) scale(0);
-  opacity:0;
-  transition:all .32s cubic-bezier(.2,.9,.2,1);
-  width:18px;height:18px;display:flex;align-items:center;justify-content:center;
+
+/* Large variant used for prominent CTA (En savoir plus) */
+.oval-btn.large{
+  padding:14px 32px;
+  font-size:15px;
+  box-shadow: 0 18px 36px rgba(50,192,193,0.12);
 }
-.oval-btn:hover{transform:translateY(-2px)}
-.oval-btn:hover .mini-arrow{transform:translate(120%,-60%) rotate(45deg) scale(1);opacity:1}
-.oval-btn .mini-arrow svg{width:18px;height:18px;display:block;color:var(--text)}
+
+/* Primary oval (En savoir plus) -> gradient cyan→rose */
+.oval-btn.oval-primary{
+  background: linear-gradient(90deg,var(--accent),var(--accent-2));
+  color: #071014;
+  border: none;
+}
+.oval-btn.oval-primary:hover{transform:translateY(-2px);filter:brightness(1.03)}
+.oval-btn.oval-primary:focus{outline:3px solid rgba(50,192,193,0.12);outline-offset:3px}
+
+/* Neutral oval (Discover) — color depends on theme.
+   Light theme: dark oval with white text.
+   Dark theme: white oval with dark text. */
+:root[data-theme="light"] .oval-btn.oval-neutral {
+  background: #071014;
+  color: #fff;
+  box-shadow: 0 10px 26px rgba(7,16,20,0.06);
+  border:1px solid rgba(7,16,20,0.04);
+}
+:root[data-theme="light"] .oval-btn.oval-neutral:hover{
+  background:#0f1720;
+  color:#fff;
+}
+
+:root:not([data-theme="light"]) .oval-btn.oval-neutral {
+  background: #ffffff;
+  color: #071014;
+  box-shadow: 0 8px 24px rgba(2,8,12,0.06);
+  border:1px solid rgba(0,0,0,0.06);
+}
+:root:not([data-theme="light"]) .oval-btn.oval-neutral:hover{
+  background:#f4f4f6;
+}
 
 /* Content grid */
 .content{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;grid-auto-rows:minmax(240px,auto);padding-bottom:60px}
 
 /* Card */
 .card{background:var(--card);padding:24px;border-radius:14px;box-shadow:0 18px 40px rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.03);display:flex;flex-direction:column;min-height:240px}
+:root[data-theme="light"] .card{box-shadow:0 8px 24px rgba(2,8,12,0.06);border:1px solid rgba(7,16,20,0.04)}
 .card-inner{display:flex;flex-direction:column;gap:12px;flex:1}
 .card-actions{display:flex;gap:8px;margin-top:auto}
 .card h2{margin:0 0 8px 0;font-size:22px}
-.card p{color:var(--muted);margin:0 0 12px 0;line-height:1.6}
+.card p{color:var(--muted);margin:0 0 12px 0;line-height:1.6;max-width:100%}
 
 /* EP GRID & FLIP CARDS */
 .ep-grid{display:flex;gap:12px;align-items:stretch;flex-wrap:wrap}
-.ep-card{position:relative;width:200px;height:120px;border-radius:12px;cursor:pointer;perspective:1000px}
+.ep-card{position:relative;width:200px;height:120px;border-radius:12px;cursor:pointer;perspective:1000px;overflow:visible}
 .ep-card-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .6s}
 .ep-card.flipped .ep-card-inner{transform:rotateY(180deg)}
-.ep-front,.ep-back{position:absolute;inset:0;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px;backface-visibility:hidden}
-.ep-front{background:linear-gradient(180deg,#0c1a2a,#07344a);color:#fff;font-weight:700;text-align:center}
+.ep-front,.ep-back{position:absolute;inset:0;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px;backface-visibility:hidden;overflow:hidden}
+.ep-front{background-color:var(--card); color:var(--text); font-weight:700;text-align:center}
 .ep-front span{display:block;font-weight:400;font-size:13px;color:var(--muted)}
-.ep-back{background:linear-gradient(180deg,#0f1113,#111315);color:var(--text);transform:rotateY(180deg);text-align:center;padding:12px}
-.ep-back p{font-weight:500;color:var(--text);margin-bottom:12px}
-.ep-back .btn-visionner{display:inline-flex;align-items:center;gap:8px}
+.ep-back{background:var(--card); color:var(--text); transform:rotateY(180deg); text-align:center; padding:12px; justify-content:space-between}
+.ep-back p.ep-summary{font-weight:500;color:var(--muted);margin:0 0 12px 0;line-height:1.4; text-align:left; width:100%; display:-webkit-box; -webkit-line-clamp:4; -webkit-box-orient:vertical; overflow:hidden;}
+.ep-back .btn-visionner{display:inline-flex;align-items:center;gap:8px; align-self:flex-end; margin-top:8px}
 
 /* Video wrapper inside overlay */
 .video-wrap{position:relative;padding-top:56.25%;width:100%}
@@ -118,12 +154,18 @@ html,body{
 .overlay .close{position:absolute;top:12px;right:12px;border:0;background:transparent;color:var(--muted);font-size:20px;cursor:pointer}
 .overlay-content{max-height:70vh;overflow:auto;padding-right:6px}
 
+/* Footer: minimal, balanced left/right */
+.site-footer{padding:12px 0;background:transparent}
+.footer-inner{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:13px}
+.footer-inner .left,.footer-inner .right{opacity:0.95}
+
 /* reveal */
 .reveal{opacity:0;transform:translateY(14px);transition:all .6s cubic-bezier(.2,.9,.2,1)}
 .reveal.visible{opacity:1;transform:none}
 
-/* Responsive */
+/* Responsive logo sizes */
 @media (max-width:1100px){
+  .logo{width:96px;height:96px}
   .content{grid-template-columns:1fr;gap:20px;padding:12px 20px}
   .card{min-height:auto;padding:20px}
   .ep-grid{justify-content:flex-start;overflow:auto;padding-bottom:6px}
@@ -132,6 +174,8 @@ html,body{
 @media (max-width:480px){
   .hero h1{font-size:24px}
   .oval-btn{width:100%;justify-content:center}
+  .logo{width:64px;height:64px}
+  .oval-btn.large{padding:12px 20px;font-size:15px}
   .ep-card{width:100%;height:140px}
   .ep-grid{flex-direction:column;gap:12px}
 }
