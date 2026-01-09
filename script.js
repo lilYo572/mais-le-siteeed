@@ -218,7 +218,22 @@ newsBtn.addEventListener('click', () => {
       applyTheme(next, true);
     });
   }
+const logoImg = document.getElementById('site-logo');
 
+function updateLogoForTheme(pref) {
+  if (!logoImg) return;
+
+  if (pref === 'light') {
+    logoImg.src = 'image/logo bb site sombre.png';
+  } else if (pref === 'dark') {
+    logoImg.src = 'image/logo bb site clair.png';
+  } else {
+    const isLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+    logoImg.src = isLight
+      ? 'image/logo bb site sombre.png'
+      : 'image/logo bb site clair.png';
+  }
+}
   /* helper to aid future deployments */
   window.__brad_setNewsVersion = (ver) => {
     try { localStorage.removeItem(NEWS_READ_KEY); } catch (e) {}
