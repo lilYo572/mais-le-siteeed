@@ -13,7 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const newsBadge = $('#news-badge');
 
   const ovalLearn = $('#oval-learn');
+  const ovalDiscover = $('#btn-discover');
   const themeToggle = $('#theme-toggle');
+  const logoImg = $('#site-logo'); // new: logo element controlled by JS
   const THEME_KEY = 'brad_theme_pref';
   // NEWS_VERSION: increment this string when you publish a new "Nouveautés" entry
   const NEWS_VERSION = '1'; // <-- bump to '2' on next update to make the badge reappear for all users
@@ -24,13 +26,14 @@ document.addEventListener('DOMContentLoaded', () => {
     welcome: `
       <h2>En savoir plus</h2>
       <p>
-      Ce site rassemble tout ce qui gravite autour du projet : les expériences interactives, les épisodes, les ambiances sonores et les éléments de récit qui donnent vie à ce monde.</p>
-
-      <p>Vous pouvez y découvrir le futur jeu et son univers, suivre les aventures de Brad à travers de courts épisodes, et explorer peu à peu l’histoire qui se dessine en arrière-plan.</p>
-
-      <p>Certains contenus sont déjà accessibles, d’autres arriveront progressivement. L’idée est simple : offrir un point d’entrée clair pour explorer, comprendre et suivre l’évolution du projet.</p>
-
-      <p>Utilisez les boutons « Découvrir » et « Voir » pour naviguer librement entre les contenus.</p>
+        C'est ici que l'univers de Brad Bitt prend vie. Sur ce site vous trouverez des articles de développement, 
+        des aperçus exclusifs des prochains projets, des coulisses et des contenus réservés aux visiteurs curieux.
+        Nous partageons des notes de design, des prototypes, et des inspirations qui façonnent l'expérience.
+      </p>
+      <p>
+        N'hésitez pas à revenir régulièrement — de nouvelles pages, vidéos et prototypes sont ajoutés au fil du temps.
+        Abonnez-vous aux mises à jour ou repassez de temps à autre pour découvrir les nouveautés.
+      </p>
     `,
     news: `
       <h2>Nouveautés</h2>
@@ -38,22 +41,44 @@ document.addEventListener('DOMContentLoaded', () => {
     `,
     game: `
       <h2>Brad Bitt — Le jeu</h2>
-      <p>Aperçu du jeu, mécaniques et notes de développement.</p>
+      <p>Aperçu du jeu, mécaniques et notes de développement. Screens, sprites et petits aperçus.</p>
     `
   };
+
+  /* Logo helpers: swap image based on theme.
+     Expected files in image/:
+       - "logo bb site sombre.png"  (used for light theme — dark logo on light bg)
+       - "logo bb site clair.png"   (used for dark theme — light logo on dark bg)
+  */
+  function setLogoSrc(filename) {
+    if (!logoImg) return;
+    const encoded = filename.replace(/ /g, '%20');
+    logoImg.src = `image/${encoded}`;
+  }
+  function updateLogoForTheme(pref) {
+    try {
+      const darkLogo = 'logo bb site sombre.png';
+      const lightLogo = 'logo bb site clair.png';
+      if (pref === 'light') setLogoSrc(darkLogo);
+      else if (pref === 'dark') setLogoSrc(lightLogo);
+      else {
+        const isLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+        if (isLight) setLogoSrc(darkLogo);
+        else setLogoSrc(lightLogo);
+      }
+    } catch (e) { /* ignore */ }
+  }
 
   /* NEWS badge logic */
   function refreshNewsBadge() {
     try {
       const seen = localStorage.getItem(NEWS_READ_KEY);
       if (!newsBadge) return;
-      // If stored version equals current, hide the badge; otherwise show (first load)
       newsBadge.hidden = (seen === NEWS_VERSION);
     } catch (e) { /* ignore */ }
   }
   refreshNewsBadge();
 
-  // Mark news as read (store the current version)
   function markNewsRead() {
     try {
       localStorage.setItem(NEWS_READ_KEY, NEWS_VERSION);
@@ -61,17 +86,18 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (e) {}
   }
 
-  // Clicking the news button opens the panel and marks read
   if (newsBtn) {
     newsBtn.addEventListener('click', () => {
-      markNewsRead();
+      try { localStorage.setItem(NEWS_READ_KEY, NEWS_VERSION); } catch (e) {}
+      if (newsBadge) newsBadge.hidden = true;
       openPanel('news');
     });
   }
-  // Clicking the badge itself should also mark it read
+
+  // Ensure clicking the badge itself does not prevent the button action:
   if (newsBadge) {
     newsBadge.addEventListener('click', (e) => {
-      e.stopPropagation();
+      // mark as read but allow the button click handler to run (do not stopPropagation)
       markNewsRead();
     });
   }
@@ -87,9 +113,6 @@ document.addEventListener('DOMContentLoaded', () => {
     lastFocused = document.activeElement;
     document.body.style.overflow = 'hidden';
     overlayInner.focus();
-
-    // If opening news panel, mark news as read
-    if (key === 'news') markNewsRead();
   }
   function closePanel() {
     if (!overlay) return;
@@ -97,7 +120,6 @@ document.addEventListener('DOMContentLoaded', () => {
     overlay.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
     if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
-    // stop embedded video by clearing content
     if (overlayContent) overlayContent.innerHTML = '';
   }
   if (overlayClose) overlayClose.addEventListener('click', closePanel);
@@ -124,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // handle Visionner / Voir button clicks (delegated)
+  // handle Visionner button clicks (delegated)
   document.addEventListener('click', (e) => {
     const btn = e.target.closest('.btn-visionner');
     if (!btn) return;
@@ -145,53 +167,19 @@ document.addEventListener('DOMContentLoaded', () => {
     openPanel(null, { html: playerHtml });
   });
 
-  /* Theme init + toggle (light/dark/auto) */
-  function applyTheme(pref, save = true) {
-    try {
-      const root = document.documentElement;
-      if (pref === 'light') {
-        root.setAttribute('data-theme', 'light');
-      } else if (pref === 'dark') {
-        root.removeAttribute('data-theme');
-      } else {
-        // auto
-        const isLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
-        if (isLight) root.setAttribute('data-theme', 'light');
-        else root.removeAttribute('data-theme');
-      }
-
-      // update toggle visuals
-      if (themeToggle) {
-        themeToggle.classList.remove('is-light','is-dark');
-        if (pref === 'light') themeToggle.classList.add('is-light');
-        else if (pref === 'dark') themeToggle.classList.add('is-dark');
-        // title
-        const title = pref === 'auto' ? 'Mode : automatique' : (pref === 'light' ? 'Mode : clair' : 'Mode : sombre');
-        themeToggle.setAttribute('title', title);
-        themeToggle.setAttribute('aria-label', title);
-      }
-
-      if (save) {
-        try { localStorage.setItem(THEME_KEY, pref); } catch(e) {}
-      }
-    } catch (e) { /* ignore */ }
-  }
-
-  // initial read
+  /* Theme init (light/dark/auto) */
   try {
-    const saved = localStorage.getItem(THEME_KEY) || 'auto';
-    applyTheme(saved, false);
-  } catch(e){ applyTheme('auto', false); }
-
-  // cycle through modes on click: auto -> light -> dark -> auto
-  if (themeToggle) {
-    themeToggle.addEventListener('click', () => {
-      const current = localStorage.getItem(THEME_KEY) || 'auto';
-      const order = ['auto','light','dark'];
-      const next = order[(order.indexOf(current) + 1) % order.length];
-      applyTheme(next, true);
-    });
-  }
+    const initial = localStorage.getItem(THEME_KEY) || 'auto';
+    if (initial === 'light') document.documentElement.setAttribute('data-theme', 'light');
+    else if (initial === 'dark') document.documentElement.removeAttribute('data-theme');
+    else {
+      const isLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+      if (isLight) document.documentElement.setAttribute('data-theme', 'light');
+      else document.documentElement.removeAttribute('data-theme');
+    }
+    // update logo according to initial theme preference
+    updateLogoForTheme(initial);
+  } catch(e){/* ignore */ }
 
   /* helper to aid future deployments */
   window.__brad_setNewsVersion = (ver) => {
@@ -203,9 +191,32 @@ document.addEventListener('DOMContentLoaded', () => {
   (function revealOnLoad() {
     const reveals = $$('.reveal');
     if (!reveals.length) return;
+    // léger décalage/stagger pour l'effet
     reveals.forEach((el, i) => {
       setTimeout(() => el.classList.add('visible'), 80 * i);
     });
   })();
+
+  /* Theme toggle: ensure logo updates when user changes theme */
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      try {
+        const current = localStorage.getItem(THEME_KEY) || 'auto';
+        const order = ['auto','light','dark'];
+        const next = order[(order.indexOf(current) + 1) % order.length];
+        localStorage.setItem(THEME_KEY, next);
+        // apply visually (same logic as initialization)
+        if (next === 'light') document.documentElement.setAttribute('data-theme', 'light');
+        else if (next === 'dark') document.documentElement.removeAttribute('data-theme');
+        else {
+          const isLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+          if (isLight) document.documentElement.setAttribute('data-theme', 'light');
+          else document.documentElement.removeAttribute('data-theme');
+        }
+        // update logo for the new theme
+        updateLogoForTheme(next);
+      } catch (e) { /* ignore */ }
+    });
+  }
 
 });
