@@ -15,8 +15,9 @@
     <div class="container header-inner">
       <div class="brand" role="banner">
         <div class="logo" aria-hidden="true">
-          <!-- Logo (panoramic source). Use an image with transparent background. -->
-          <img src="image/logo%20BB%20mais%20le%20site.png" alt="Logo Brad Bitt">
+          <!-- IMG id added so JS can swap logos based on theme.
+               Initial src is the 'sombre' variant; JS will override on load. -->
+          <img id="site-logo" src="image/logo%20bb%20site%20sombre.png" alt="Logo Brad Bitt">
         </div>
         <div class="brand-text">
           <div class="title">Brad Bitt</div>
@@ -54,10 +55,13 @@
   <main id="app-main">
     <section class="hero container reveal">
       <h1>Bienvenue sur le site</h1>
+      <p class="hero-lead">Regroupe les jeux, les épisodes et les coulisses de Brad Bitt.</p>
 
-      <!-- En savoir plus: ovale gradient plus large and visible -->
-      <button class="oval-btn oval-primary large" id="oval-learn" aria-controls="panel-welcome" aria-expanded="false">
+      <button class="oval-btn" id="oval-learn" aria-controls="panel-welcome">
         <span class="label">En savoir plus</span>
+        <span class="mini-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14M12 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
       </button>
     </section>
 
@@ -66,13 +70,22 @@
       <article class="card reveal" id="game">
         <div class="card-inner">
           <div class="card-top">
-            <h2>Brad Bitt, mais le jeu</h2>
-            <p>Plongez dans l'univers de Bitt.</p>
+            <h2>Brad Bitt — Le jeu</h2>
+            <p>Présentation du projet, inspirations et teasers. Aperçu du gameplay, sprites et mécanique.</p>
           </div>
 
           <div class="card-actions">
-            <!-- Discover button: opens Canva presentation in new tab -->
-            <a class="oval-btn oval-neutral" id="btn-discover" href="https://bbmaislaprésentation.my.canva.site" target="_blank" rel="noopener noreferrer" role="button">Découvrir</a>
+            <button class="btn" id="btn-discover">Découvrir</button>
+
+          
+            <a
+              class="btn"
+              href="https://bbmaislaprésentation.my.canva.site"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Accéder au projet
+            </a>
           </div>
         </div>
       </article>
@@ -85,34 +98,34 @@
             <p>Mini-série : petits épisodes, gros mystère.</p>
           </div>
 
-          <!-- EP GRID with embedded video IDs on data-video -->
+          <!-- Remplacez YOUTUBE_ID_EP* par les vrais IDs -->
           <div class="ep-grid" id="ep-grid" aria-hidden="false">
-            <div class="ep-card" tabindex="0" data-episode="1" data-video="PQEFBGobdZM">
+            <div class="ep-card" tabindex="0" data-episode="1" data-video="PQEFBGobdZM?si=nUEVmylqJuCMD0uU">
               <div class="ep-card-inner">
                 <div class="ep-front"><strong>Épisode 1</strong><span>La soirée</span></div>
                 <div class="ep-back">
-                  <p class="ep-summary">Brad se mit en route pour une soirée, mais la route n'était pas des plus agréables.</p>
-                  <button class="btn btn-visionner" data-video="PQEFBGobdZM">Voir</button>
+                  <p class="ep-summary">Brad Bitt est invité à une somptueuse soirée ; pressé, il s’habille et prend sa voiture habituelle. Mais sur le chemin, un événement inattendu survient [...]
+                  <button class="btn btn-visionner" data-video="PQEFBGobdZM?si=nUEVmylqJuCMD0uU">Visionner</button>
                 </div>
               </div>
             </div>
 
-            <div class="ep-card" tabindex="0" data-episode="2" data-video="AxQZmL8W_i0">
+            <div class="ep-card" tabindex="0" data-episode="2" data-video="AxQZmL8W_i0?si=ilgvJaNuM1n2IaSc">
               <div class="ep-card-inner">
-                <div class="ep-front"><strong>Épisode 2</strong><span>Ligoté</span></div>
+                <div class="ep-front"><strong>Épisode 2</strong><span>Changement de programme</span></div>
                 <div class="ep-back">
-                  <p class="ep-summary">Brad disparaît dans des circonstances étranges.</p>
-                  <button class="btn btn-visionner" data-video="AxQZmL8W_i0">Voir</button>
+                  <p class="ep-summary">Après une nuit mouvementée, Brad est capturé par des hommes cagoulés. Interrogé sur des accusations incompréhensibles, il refuse d’avouer et tente de s�[...]
+                  <button class="btn btn-visionner" data-video="AxQZmL8W_i0?si=ilgvJaNuM1n2IaSc">Visionner</button>
                 </div>
               </div>
             </div>
 
-            <div class="ep-card" tabindex="0" data-episode="3" data-video="4YfBA-63uqw">
+            <div class="ep-card" tabindex="0" data-episode="3" data-video="4YfBA-63uqw?si=X2sLZoeyPwmWUQdb">
               <div class="ep-card-inner">
                 <div class="ep-front"><strong>Épisode 3</strong><span>Retard</span></div>
                 <div class="ep-back">
-                  <p class="ep-summary">À la suite de sa chute, Brad tomba dans un lieu mystérieux, avec d'étranges indications.</p>
-                  <button class="btn btn-visionner" data-video="4YfBA-63uqw">Voir</button>
+                  <p class="ep-summary">Réveillé après une chute amortie par un improbable trampoline, Brad découvre un lieu abandonné et une porte menaçante : un avertissement clair invite à n[...]
+                  <button class="btn btn-visionner" data-video="4YfBA-63uqw?si=X2sLZoeyPwmWUQdb">Visionner</button>
                 </div>
               </div>
             </div>
@@ -125,7 +138,7 @@
         <div class="card-inner">
           <div class="card-top">
             <h2>Musiques</h2>
-            <p> Plongez dans l’ambiance musicale du jeu..</p>
+            <p>Plongez dans l’ambiance musicale du jeu.</p>
           </div>
           <div class="card-actions">
             <button class="btn disabled" aria-disabled="true">Prochainement</button>
@@ -150,7 +163,7 @@
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <div class="left">version 1.0</div>
+      <div class="left">Version 1.0</div>
       <div class="right">IMAGINe Studio &amp; Engine HwR</div>
     </div>
   </footer>
@@ -160,6 +173,19 @@
     <div class="overlay-inner" id="overlay-inner" tabindex="-1" role="document">
       <button class="close" id="overlay-close" aria-label="Fermer">✕</button>
       <div id="overlay-content" class="overlay-content" tabindex="0"></div>
+    </div>
+  </div>
+
+  <!-- External link warning -->
+  <div id="external-warn" class="overlay hidden" role="dialog" aria-modal="true">
+    <div class="overlay-inner">
+      <button class="close" id="warn-close" aria-label="Fermer">✕</button>
+      <h3>Vous allez quitter le site</h3>
+      <p id="warn-msg">En cliquant sur continuer, vous quitterez le site pour aller vers :</p>
+      <div class="warn-actions">
+        <button class="btn" id="warn-cont">Continuer</button>
+        <button class="btn" id="warn-cancel">Annuler</button>
+      </div>
     </div>
   </div>
 
