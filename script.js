@@ -16,8 +16,34 @@ document.addEventListener('DOMContentLoaded', () => {
   const themeToggle = $('#theme-toggle');
   const THEME_KEY = 'brad_theme_pref';
   // NEWS_VERSION: increment this string when you publish a new "Nouveautés" entry
-  const NEWS_VERSION = '1'; // <-- bump to '2' on next update to make the badge reappear for all users
-  const NEWS_READ_KEY = 'brad_news_seen_version';
+ const NEWS_VERSION = '1';
+const NEWS_READ_KEY = 'brad_news_seen_version';
+
+function refreshNewsBadge() {
+  if (!newsBadge) return;
+
+  const seenVersion = localStorage.getItem(NEWS_READ_KEY);
+
+  if (seenVersion === NEWS_VERSION) {
+    newsBadge.hidden = true;
+  } else {
+    newsBadge.hidden = false;
+  }
+}
+
+function markNewsRead() {
+  localStorage.setItem(NEWS_READ_KEY, NEWS_VERSION);
+  newsBadge.hidden = true;
+}
+
+// Au chargement
+refreshNewsBadge();
+
+// Au clic sur "Nouveautés"
+newsBtn.addEventListener('click', () => {
+  markNewsRead();
+  openPanel('news');
+});
 
   // Panels content (welcome = en savoir plus)
   const PANELS = {
